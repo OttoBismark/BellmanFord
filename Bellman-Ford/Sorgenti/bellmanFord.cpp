@@ -62,7 +62,7 @@ bool BellmanFord::pathfind(Grafo *g, int source)
       /*Rilassamento: se il vertice "u" ha valore diverso da INT_MAX e la somma
       del vettore "v" più il peso è numore di "u", allora aggiornare il valore
       del nodo "v"*/
-      if(d[u] != INT_MAX && d[u] > d[v] + w)
+      if(d[u] != INT_MAX && d[v] > d[u] + w)
       {
         d[v] = d[u] + w;
       }
