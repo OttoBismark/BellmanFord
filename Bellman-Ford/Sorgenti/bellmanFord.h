@@ -16,7 +16,7 @@ class BellmanFord
 		/*Distruttore della classe BellmanFord utilizzando un distruttore virtuale*/
 		virtual ~BellmanFord();
 		/*Metodo pathfind() per eseguire l'algoritmo di BellmanFord*/
-		bool pathfind(Grafo *g, int source);
+		void pathfind(Grafo *g, int source);
 };
 
 #endif

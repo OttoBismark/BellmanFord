@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <climits>
+#include <map>
 #include "grafo.h"
 #include "vertice.h"
 #include "bellmanFord.h"
@@ -21,8 +22,9 @@ BellmanFord::~BellmanFord()
 Algoritmo di Bellman - Ford
 
 */
-bool BellmanFord::pathfind(Grafo *g, int source)
+void BellmanFord::pathfind(Grafo *g, int source)
 {
+  bool negative = true;
   /*Ottengo il numero di vertici totali del nodo*/
   int V = g->getVertex();
   /*
@@ -30,6 +32,8 @@ bool BellmanFord::pathfind(Grafo *g, int source)
   vertici del grafo
   */
   int d[V];
+  int p[V];
+
 
   /*
   Inizializzazione del vettore delle distanza, le cui i-esime componenti
@@ -38,10 +42,12 @@ bool BellmanFord::pathfind(Grafo *g, int source)
   for(int i = 0; i < V; i++)
   {
     d[i] = INT_MAX;
+    p[i] = -1;
   }
 
   /*Inizializzazione della sorgente a zero*/
   d[source] = 0;
+
 
   /*Dichiarazione della lista di adiacenze*/
   list<Arco *> *e = g->getAdj();
@@ -60,11 +66,12 @@ bool BellmanFord::pathfind(Grafo *g, int source)
       int w = (*it)->getW();
 
       /*Rilassamento: se il vertice "u" ha valore diverso da INT_MAX e la somma
-      del vettore "u" più il peso è numore di "u", allora aggiornare il valore
+      del vettore "u" più il peso è numore di "v", allora aggiornare il valore
       del nodo "v"*/
       if(d[u] != INT_MAX && d[v] > d[u] + w)
       {
         d[v] = d[u] + w;
+        p[v] = u;
       }
     }
   }
@@ -76,6 +83,7 @@ bool BellmanFord::pathfind(Grafo *g, int source)
   L'algoritmo di BellmanFord ritorna true se non ci sono cicli negativi.
   Altrimenti ritorna false se esiste almeno un valore il cui ciclo risulta
   essere negativo*/
+
   for(itt = ee->begin(); itt != ee->end(); itt++)
   {
     int u = (*itt)->getU()->getValore();
@@ -84,9 +92,49 @@ bool BellmanFord::pathfind(Grafo *g, int source)
 
     if(d[u] != INT_MAX && d[v] > d[u] + w)
     {
-      return false;
+      negative = false;
     }
   }
 
-  return true;
+
+  if(negative)
+  {
+    cout << "\n\t\tNon ci sono cicli negativi" << endl;
+    cout << "Vettore delle distanze: " << endl;
+    for(int i = 0; i < V; i++)
+    {
+      if(d[i] != 0)
+      {
+        cout << d[i] << " -> ";
+      }
+    }
+
+    cout << "\n\n";
+
+    list<int> l;
+    l.push_back(source);
+
+    while(!l.empty())
+    {
+      int x = l.back();
+      l.pop_back();
+
+      for(int i = 0; i < V; i++)
+      {
+        if(x == p[i])
+        {
+          cout << "Dal vertice " << x << " verso " <<" -> " << i
+          << " con distanza --> " << d[i] << endl;
+          l.push_back(i);
+        }
+      }
+    }
+  }
+  else
+  {
+    cout << "\n\t\tSono presenti cicli negativi" << endl;
+    return;
+  }
+
+  cout << "\n";
 }

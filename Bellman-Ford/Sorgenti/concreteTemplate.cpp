@@ -32,6 +32,8 @@ void concreteTemplate::intro()
 void concreteTemplate::menuApplication()
 {
   unsigned char c;
+  short int corretto = 0;
+  int V, vertice;
   BellmanFord *bf;
   string name;
   cout << endl;
@@ -56,14 +58,27 @@ void concreteTemplate::menuApplication()
   if(c == 'y' || c == 'Y')
   {
     bf = new BellmanFord();
-    if(bf->pathfind(g, 0))
+    V = g->getVertex();
+
+    while(!corretto)
     {
-      cout << "\n\t\tNon ci sono cicli negativi" << endl;
+      cout << "\n\n" << endl;
+      cout << "Inserire indice del vertice sorgente" << endl;
+      cout << "Inserire un numero da 0 a " << V-1 << endl;
+      cin >> vertice;
+
+      if(vertice > V-1)
+      {
+        cerr << "Errore! Numero di vertici incorretto" << endl;
+        cerr << "Inserire un numero di vertici che va da 0 a " << V-1 << endl;
+      }
+      else
+      {
+        corretto = 1;
+      }
     }
-    else
-    {
-      cout << "\n\t\tSono presenti cicli negativi" << endl;
-    }
+
+    bf->pathfind(g, vertice);
   }
   else
   {
