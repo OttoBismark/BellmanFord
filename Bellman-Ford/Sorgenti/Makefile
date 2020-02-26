@@ -14,21 +14,6 @@ output := $(wildcard $(OUT_DIR)/*.out)
 text := $(wildcard *.txt)
 #$(addprefix $(FOLDER)/$(SRC)/, $(OBJ))
 
-# Add LIB folder in the root project directory
-ifeq ("$(wildcard $(FOLDER)/lib/)", "")
-$(shell mkdir -p $(FOLDER)/lib/)
-endif
-
-# Add BIN folder in the root project directory
-ifeq ("$(wildcard $(FOLDER)/bin/)", "")
-$(shell mkdir -p $(FOLDER)/bin/)
-endif
-
-
-# Add OPT folder in the root project directory
-ifeq ("$(wildcard $(FOLDER)/opt/)", "")
-$(shell mkdir -p $(FOLDER)/opt/)
-endif
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
 $(shell echo "LA CARTELLA $(OUT_DIR) NON ESISTE " 1>&2)
