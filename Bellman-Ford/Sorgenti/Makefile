@@ -5,7 +5,7 @@ SRC = src
 HEADER = include
 TEXT_DIR = text
 DIRECTORY = $(PWD)
-# PHONY: build clean destroy
+SSS = $(shell echo $(SHELL))
 
 
 source := $(wildcard *.cpp)
@@ -35,35 +35,13 @@ $(shell cp $(wildcard *txt) ../$(TEXT_DIR))
 endif
 
 
-
-	# mkdir -p ../$(HEADER)
-	# mkdir -p ../$(TEXT_DIR)
-
-	# cp $(wildcard *cpp) ../$(SRC)
-	# cp $(wildcard *h) ../$(HEADER)
-	# cp $(wildcard *txt) ../$(TEXT_DIR)
-
-all: preset build clean head
+all: build clean head
 .PHONY: all
 
 # all: preproc build clean
 
-
 # preproc:
 # 	g++ *.cpp -E -o *.i
-
-preset:
-	@echo "preset... "
-
-	# mkdir -p $(FOLDER)/$(OUT_DIR)
-	# mkdir -p ../$(SRC)
-	# mkdir -p ../$(HEADER)
-	# mkdir -p ../$(TEXT_DIR)
-
-	# cp $(wildcard *cpp) ../$(SRC)
-	# cp $(wildcard *h) ../$(HEADER)
-	# cp $(wildcard *txt) ../$(TEXT_DIR)
-
 
 
 build:
@@ -77,7 +55,6 @@ head:
 	@echo "head..."
 	@echo $(source)
 	@echo $(header)
-	# @echo $(output)
 	@echo $(text)
 	@echo "Out folder -> " $(wildcard $(OUT_DIR)/*.out)
 
@@ -96,6 +73,8 @@ clean:
 	@echo "Addprefix -> "$(addprefix $(FOLDER)/obj/, $(OBJ)) 
 	#Aggiunge il suffisso al file di riferimento
 	@echo "Addsuffix -> " $(addsuffix :, main)
+	#Bourne Again SHell
+	@echo "Bourne Again SHell --> " $(SSS)
 	rm -rf *.gch
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
@@ -112,10 +91,7 @@ destroy:
 	rm -rf $(OUT_DIR)
 	rm -rf ../$(HEADER)
 	rm -rf ../$(SRC)
-	rm -rf ../$(TEXT_DIR)
-	# rm -rf lib/
-	# rm -rf bin/
-	# rm -rf opt/
+	rm -rf ../$(TEXT_DIR)9
 
 
 # ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
