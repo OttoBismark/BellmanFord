@@ -91,7 +91,7 @@ destroy:
 	rm -rf $(OUT_DIR)
 	rm -rf ../$(HEADER)
 	rm -rf ../$(SRC)
-	rm -rf ../$(TEXT_DIR)9
+	rm -rf ../$(TEXT_DIR)
 
 
 # ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
