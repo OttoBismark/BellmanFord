@@ -16,9 +16,32 @@ text := $(wildcard *.txt)
 
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
-$(shell echo "LA CARTELLA $(OUT_DIR) NON ESISTE " 1>&2)
 $(shell mkdir -p $(FOLDER)/$(OUT_DIR)/)
 endif
+
+ifeq ("$(wildcard ../$(SRC))", "")
+$(shell mkdir -p ../$(SRC))
+$(shell cp $(wildcard *cpp) ../$(SRC))
+endif
+
+ifeq ("$(wildcard ../$(HEADER))", "")
+$(shell mkdir -p ../$(HEADER))
+$(shell cp $(wildcard *h) ../$(HEADER))
+endif
+
+ifeq ("$(wildcard ../$(TEXT_DIR))", "")
+$(shell mkdir -p ../$(TEXT_DIR))
+$(shell cp $(wildcard *txt) ../$(TEXT_DIR))
+endif
+
+
+
+	# mkdir -p ../$(HEADER)
+	# mkdir -p ../$(TEXT_DIR)
+
+	# cp $(wildcard *cpp) ../$(SRC)
+	# cp $(wildcard *h) ../$(HEADER)
+	# cp $(wildcard *txt) ../$(TEXT_DIR)
 
 all: preset build clean head
 .PHONY: all
@@ -31,23 +54,15 @@ all: preset build clean head
 
 preset:
 	@echo "preset... "
-# ifeq ("$(wildcard $(FOLDER)/lib/)", "")
-# 	@echo "is empty or does not exist... "
-# 	mkdir -p $(FOLDER)/lib/
-
-# else
-# 	@echo "is NOT empty or ALREADY exist!"
-# 	mkdir -p $(FOLDER)/lib/
-# endif
 
 	# mkdir -p $(FOLDER)/$(OUT_DIR)
-	mkdir -p ../$(SRC)
-	mkdir -p ../$(HEADER)
-	mkdir -p ../$(TEXT_DIR)
+	# mkdir -p ../$(SRC)
+	# mkdir -p ../$(HEADER)
+	# mkdir -p ../$(TEXT_DIR)
 
-	cp $(wildcard *cpp) ../$(SRC)
-	cp $(wildcard *h) ../$(HEADER)
-	cp $(wildcard *txt) ../$(TEXT_DIR)
+	# cp $(wildcard *cpp) ../$(SRC)
+	# cp $(wildcard *h) ../$(HEADER)
+	# cp $(wildcard *txt) ../$(TEXT_DIR)
 
 
 
@@ -84,9 +99,9 @@ clean:
 	rm -rf *.gch
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
-	@echo "is empty or does not exist... "
+		$(shell echo "is empty or does not exist... "1>&2)
 else
-	@echo "is NOT empty or ALREADY exist!"
+		$(shell echo "is NOT empty or ALREADY exist!" 1>&2)
 endif
 
 destroy:
@@ -98,9 +113,9 @@ destroy:
 	rm -rf ../$(HEADER)
 	rm -rf ../$(SRC)
 	rm -rf ../$(TEXT_DIR)
-	rm -rf lib/
-	rm -rf bin/
-	rm -rf opt/
+	# rm -rf lib/
+	# rm -rf bin/
+	# rm -rf opt/
 
 
 # ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
