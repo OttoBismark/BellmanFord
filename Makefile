@@ -1,36 +1,36 @@
 OBJ = bellmanFord.out
-FOLDER = /home/kineton/BellmanFord/Bellman-Ford/Sorgenti
+FOLDER = /home/kineton/BellmanFord
 OUT_DIR = out
 SRC = src
 HEADER = include
 TEXT_DIR = text
-DIRECTORY = $(PWD)
-SSS = $(shell echo $(SHELL))
+DIRECTORY = /home/kineton/BellmanFord/Bellman-Ford/Sorgenti
+# SSS = $(shell echo $(SHELL))
 
-source := $(wildcard *.cpp)
-header := $(wildcard *h)
-output := $(wildcard $(OUT_DIR)/*.out)
-text := $(wildcard *.txt)
-#$(addprefix $(FOLDER)/$(SRC)/, $(OBJ))
+source := $(wildcard $(DIRECTORY)/*.cpp)
+header := $(wildcard $(DIRECTORY)/*.h)
+output := $(wildcard $(DIRECTORY)/$(OUT_DIR)/*.out)
+text := $(wildcard $(DIRECTORY)/*.txt)
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
 $(shell mkdir -p $(FOLDER)/$(OUT_DIR)/)
 endif
 
-ifeq ("$(wildcard ../../$(SRC))", "")
-$(shell mkdir -p ../../$(SRC))
-# $(shell cp $(wildcard *cpp) ../../$(SRC))
+ifeq ("$(wildcard $(FOLDER)/$(SRC))", "")
+$(shell mkdir -p $(FOLDER)/$(SRC))
+$(shell cp $(wildcard $(DIRECTORY)/*.cpp) $(FOLDER)/$(SRC))
 endif
 
-ifeq ("$(wildcard ../../$(HEADER))", "")
-$(shell mkdir -p ../../$(HEADER))
-# $(shell cp $(wildcard *h) ../../$(HEADER))
+ifeq ("$(wildcard $(FOLDER)/$(HEADER))", "")
+$(shell mkdir -p $(HEADER))
+$(shell cp $(wildcard *.h) $(DIRECTORY)/*.h $(FOLDER)/$(HEADER))
 endif
 
-ifeq ("$(wildcard ../../$(TEXT_DIR))", "")
-$(shell mkdir -p ../../$(TEXT_DIR))
-# $(shell cp $(wildcard *txt) ../../$(TEXT_DIR))
+ifeq ("$(wildcard $(FOLDER)/$(TEXT_DIR))", "")
+$(shell mkdir -p $(FOLDER)/$(TEXT_DIR))
+$(shell cp $(wildcard *.txt) $(DIRECTORY)/*.txt $(FOLDER)/$(TEXT_DIR))
 endif
+
 
 all: build clean head
 .PHONY: all
@@ -56,19 +56,13 @@ head:
 
 clean:
 	@echo "Clean... "
-	#Ottiene il path della cartella presa di riferimento dalla variabile
-	@echo "Dir -> " $(dir $(FOLDER))
 	@echo "Wildcard -> " $(wildcard *.cpp)
 	@echo "Current folder = "$(DIRECTORY)
 	@echo "Dir 2 -> "$(dir $(FOLDER)/*.cpp)
 	#Trova il suffisso in un determinato file
 	@echo "Suffix -> "$(suffix $(FOLDER)/*.cpp $(FOLDER)/*.h)
 	#Aggiunge il prefisso al file di riferimento
-	@echo "Addprefix -> "$(addprefix $(FOLDER)/obj/, $(OBJ)) 
-	#Aggiunge il suffisso al file di riferimento
-	@echo "Addsuffix -> " $(addsuffix :, main)
-	#Bourne Again SHell
-	@echo "Bourne Again SHell --> " $(SSS)
+	@echo "Addprefix -> "$(addprefix $(FOLDER)/obj/, $(OBJ))
 	rm -rf *.gch
 
 destroy:
@@ -80,3 +74,6 @@ destroy:
 	rm -rf ../../$(HEADER)
 	rm -rf ../../$(SRC)
 	rm -rf ../../$(TEXT_DIR)
+	rm -rf $(HEADER)
+	rm -rf $(SRC)
+	rm -rf $(TEXT_DIR)
