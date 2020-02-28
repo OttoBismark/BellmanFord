@@ -4,13 +4,11 @@ OUT_DIR = out
 SRC = src
 HEADER = include
 TEXT_DIR = text
-DIRECTORY = /home/kineton/BellmanFord/Bellman-Ford/Sorgenti
-# SSS = $(shell echo $(SHELL))
+CC = g++
 
-source := $(wildcard $(DIRECTORY)/*.cpp)
-header := $(wildcard $(DIRECTORY)/*.h)
-output := $(wildcard $(DIRECTORY)/$(OUT_DIR)/*.out)
-text := $(wildcard $(DIRECTORY)/*.txt)
+source := $(wildcard $(FOLDER)/$(SRC)/*.cpp)
+header := $(wildcard $(FOLDER)/$(HEADER)/*.h)
+text := $(wildcard $(FOLDER)/$(TEXT_DIR)/*.txt)
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
 $(shell mkdir -p $(FOLDER)/$(OUT_DIR)/)
@@ -18,17 +16,14 @@ endif
 
 ifeq ("$(wildcard $(FOLDER)/$(SRC))", "")
 $(shell mkdir -p $(FOLDER)/$(SRC))
-$(shell cp $(wildcard $(DIRECTORY)/*.cpp) $(FOLDER)/$(SRC))
 endif
 
 ifeq ("$(wildcard $(FOLDER)/$(HEADER))", "")
 $(shell mkdir -p $(HEADER))
-$(shell cp $(wildcard *.h) $(DIRECTORY)/*.h $(FOLDER)/$(HEADER))
 endif
 
 ifeq ("$(wildcard $(FOLDER)/$(TEXT_DIR))", "")
 $(shell mkdir -p $(FOLDER)/$(TEXT_DIR))
-$(shell cp $(wildcard *.txt) $(DIRECTORY)/*.txt $(FOLDER)/$(TEXT_DIR))
 endif
 
 
@@ -42,7 +37,7 @@ all: build clean head
 
 build:
 	@echo "build..."
-	g++ $(source) -o $(addprefix $(FOLDER)/$(OUT_DIR)/, $(OBJ))
+	$(CC) $(source) -o $(addprefix $(FOLDER)/$(OUT_DIR)/, $(OBJ))
 	@echo " "
 	@echo "Compilazione completata"
 	@echo " "
@@ -56,24 +51,10 @@ head:
 
 clean:
 	@echo "Clean... "
-	@echo "Wildcard -> " $(wildcard *.cpp)
-	@echo "Current folder = "$(DIRECTORY)
-	@echo "Dir 2 -> "$(dir $(FOLDER)/*.cpp)
-	#Trova il suffisso in un determinato file
-	@echo "Suffix -> "$(suffix $(FOLDER)/*.cpp $(FOLDER)/*.h)
-	#Aggiunge il prefisso al file di riferimento
-	@echo "Addprefix -> "$(addprefix $(FOLDER)/obj/, $(OBJ))
 	rm -rf *.gch
 
 destroy:
 	@echo "destroy..."
 	rm -rf $(OBJ)
+	rm -rf $(FOLDER)/$(OUT_DIR)/*.out
 	rm -rf *.i
-	rm -rf src/
-	rm -rf $(OUT_DIR)
-	rm -rf ../../$(HEADER)
-	rm -rf ../../$(SRC)
-	rm -rf ../../$(TEXT_DIR)
-	rm -rf $(HEADER)
-	rm -rf $(SRC)
-	rm -rf $(TEXT_DIR)

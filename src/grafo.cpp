@@ -2,9 +2,9 @@
 #include <list>
 #include <string>
 #include <fstream>
-#include "vertice.h"
-#include "arco.h"
-#include "grafo.h"
+#include "../include/vertice.h"
+#include "../include/arco.h"
+#include "../include/grafo.h"
 
 using namespace std;
 

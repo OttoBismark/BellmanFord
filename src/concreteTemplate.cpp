@@ -1,7 +1,7 @@
-#include "abstractTemplate.h"
-#include "concreteTemplate.h"
-#include "bellmanFord.h"
-#include "grafo.h"
+#include "../include/abstractTemplate.h"
+#include "../include/concreteTemplate.h"
+#include "../include/bellmanFord.h"
+#include "../include/grafo.h"
 #include <iostream>
 
 using namespace std;

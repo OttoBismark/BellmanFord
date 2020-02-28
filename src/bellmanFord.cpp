@@ -2,10 +2,10 @@
 #include <list>
 #include <climits>
 #include <map>
-#include "grafo.h"
-#include "vertice.h"
-#include "bellmanFord.h"
-#include "arco.h"
+#include "../include/grafo.h"
+#include "../include/vertice.h"
+#include "../include/bellmanFord.h"
+#include "../include/arco.h"
 
 using namespace std;
 

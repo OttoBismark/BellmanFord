@@ -1,6 +1,6 @@
 #include <iostream>
-#include "arco.h"
-#include "vertice.h"
+#include "../include/arco.h"
+#include "../include/vertice.h"
 
 using namespace std;
 
