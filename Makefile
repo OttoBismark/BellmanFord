@@ -9,12 +9,16 @@ CC = g++
 source := $(wildcard $(FOLDER)/$(SRC)/*.cpp)
 header := $(wildcard $(FOLDER)/$(HEADER)/*.h)
 text := $(wildcard $(FOLDER)/$(TEXT_DIR)/*.txt)
+directory := $(wildcard */)
+# directory := $(foreach d, $(FOLDER), $(wildcard */))
+# sdir := $(wildcard $(directory)/ *.cpp)
+sdir := $(shell find $(SRC)/ -name "main.cpp")
 
 ifeq ("$(wildcard $(FOLDER)/$(OUT_DIR)/)", "")
 $(shell mkdir -p $(FOLDER)/$(OUT_DIR)/)
 endif
 
-ifeq ("$(wildcard $(FOLDER)/$(SRC))", "")
+ifeq ("$(wildcard $(FOLDER)/)", "")
 $(shell mkdir -p $(FOLDER)/$(SRC))
 endif
 
@@ -27,10 +31,8 @@ $(shell mkdir -p $(FOLDER)/$(TEXT_DIR))
 endif
 
 
-all: build clean head
+all: build clean
 .PHONY: all
-
-# all: preproc build clean
 
 # preproc:
 # 	g++ *.cpp -E -o *.i
@@ -42,15 +44,14 @@ build:
 	@echo "Compilazione completata"
 	@echo " "
 
-head:
-	@echo "head..."
-	@echo $(source)
-	@echo $(header)
-	@echo $(text)
-	@echo "Out folder -> " $(wildcard $(OUT_DIR)/*.out)
 
 clean:
 	@echo "Clean... "
+	# @echo "dir -> " $(directory)
+	# @echo "dir2 -> " $(sdir)
+	# @echo "root dir" $(basename $(FOLDER) $<)
+	# @echo "not dir" $(basename $(notdir $(FOLDER) $<))
+	# @echo "Out folder -> " $(wildcard $(OUT_DIR)/*.out)
 	rm -rf *.gch
 
 destroy:
