@@ -1,5 +1,5 @@
 OBJ = bellmanFord.out
-FOLDER = /home/kineton/BellmanFord
+FOLDER = $(shell pwd)
 OUT_DIR = out
 SRC = src
 HEADER = include
@@ -47,11 +47,12 @@ build:
 
 clean:
 	@echo "Clean... "
-	# @echo "dir -> " $(directory)
-	# @echo "dir2 -> " $(sdir)
-	# @echo "root dir" $(basename $(FOLDER) $<)
-	# @echo "not dir" $(basename $(notdir $(FOLDER) $<))
-	# @echo "Out folder -> " $(wildcard $(OUT_DIR)/*.out)
+	@echo "dir -> " $(directory)
+	@echo "dir2 -> " $(sdir)
+	@echo "root dir" $(basename $(FOLDER) $<)
+	@echo "not dir" $(basename $(notdir $(FOLDER) $<))
+	@echo "Out folder -> " $(wildcard $(OUT_DIR)/*.out)
+	@echo "source --> " $(notdir $(wildcard $(SRC)/main.cpp))
 	rm -rf *.gch
 
 destroy:
